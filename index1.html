@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>请仔细阅读实验说明</title>
+    <!-- 引入TailwindCSS实现样式，无需本地下载 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        // 自定义Tailwind样式
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        gray: {
+                            100: '#f3f4f6',
+                            200: '#e5e7eb',
+                            300: '#d1d5db',
+                            800: '#1f2937',
+                            900: '#111827',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Microsoft YaHei', 'Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            /* 评论回复层级样式 */
+            .comment-reply {
+                margin-left: 2rem;
+                border-left: 2px solid #e5e7eb;
+                padding-left: 1rem;
+            }
+            /* 点赞数样式 */
+            .like-count {
+                font-size: 0.75rem;
+                color: #6b7280;
+                margin-left: 0.5rem;
+            }
+            /* 滚动条美化 */
+            .custom-scrollbar::-webkit-scrollbar {
+                width: 6px;
+            }
+            .custom-scrollbar::-webkit-scrollbar-thumb {
+                background-color: #d1d5db;
+                border-radius: 3px;
+            }
+            .custom-scrollbar::-webkit-scrollbar-track {
+                background-color: #f3f4f6;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800 min-h-screen">
+    <!-- 页面标题 -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-5">
+            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-primary text-center">请仔细阅读实验说明</h1>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- 实验说明区域 -->
+        <section class="mb-8 bg-white rounded-lg shadow-sm p-6">
+            <h2 class="text-lg font-semibold mb-4 text-gray-900"><i class="fa fa-file-text-o mr-2"></i>实验说明</h2>
+            <div class="text-gray-800 leading-relaxed">
+                <!-- 可直接修改此处文字，或替换为读取本地text/experiment_note.txt（附JS读取方法，取消注释即可） -->
+                <p class="mb-3">欢迎参加本次心理学实验，本实验旨在研究网络评论区互动模式对个体认知与情绪的影响，实验全程约15-20分钟。</p>
+                <p class="mb-3">请你先观看下方实验视频，随后认真阅读视频下方的评论区内容，阅读完成后请扫描页面底部的二维码填写后测问卷。</p>
+                <p class="mb-3">实验过程中请保持注意力集中，根据自身真实感受完成问卷，你的回答将完全匿名，仅用于学术研究分析，不会泄露任何个人信息。</p>
+                <p>本次实验的参与是完全自愿的，你可以在实验过程中随时退出，且不会对你产生任何不利影响。感谢你的支持与配合！</p>
+                
+                <!-- 本地文本读取方法（取消注释即可，需确保text/experiment_note.txt存在） -->
+                <!-- <div id="experiment-note-container"></div>
+                <script>
+                    fetch('text/experiment_note.txt')
+                        .then(response => response.text())
+                        .then(text => document.getElementById('experiment-note-container').innerText = text)
+                        .catch(err => console.log('本地文本读取失败：', err));
+                </script> -->
+            </div>
+        </section>
+
+        <!-- 实验视频区域 -->
+        <section class="mb-8 bg-white rounded-lg shadow-sm p-6">
+            <h2 class="text-lg font-semibold mb-4 text-gray-900"><i class="fa fa-video-camera mr-2"></i>实验视频</h2>
+            <div class="w-full max-w-[60%] aspect-[9/16] rounded-md overflow-hidden border border-gray-200 mx-auto">
+                <!-- 本地视频路径：video/experiment_video.mp4，直接替换为你的视频即可 -->
+                <video class="w-full h-full object-cover" controls preload="metadata">
+                    <source src="video/experiment_video.mp4" type="video/mp4">
+                    你的浏览器不支持视频播放，请更换浏览器后重试。
+                </video>
+            </div>
+        </section>
+
+        <!-- 评论区区域：低攻击性+观点一致（无遗漏还原文档全部内容） -->
+        <section class="mb-8 bg-white rounded-lg shadow-sm p-6">
+            <h2 class="text-lg font-semibold mb-4 text-gray-900"><i class="fa fa-comments-o mr-2"></i>评论区</h2>
+            <div class="w-full h-96 overflow-y-auto custom-scrollbar bg-gray-50 p-4 rounded-md border border-gray-200">
+                <div class="space-y-5">
+                    <!-- 评论1 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">SyydnrLI</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 511</span>
+                        </div>
+                        <p class="text-gray-800">没养狗之前，我对类似行为给宠物花大价钱做某些事也不理解，但是养了动物以后，它给你反馈的情绪价值真的太富足了，至于花钱这个事其实我觉得就是为自己得到的情绪反馈买单，宠物养个十几年产生了极大的情感依赖，花钱送葬也是给自己空缺的心灵一个答案。</p>
+                        <div class="comment-reply space-y-3 mt-3">
+                            <div class="bg-gray-50 p-3 rounded-md">
+                                <div class="flex justify-between items-start mb-1">
+                                    <p class="font-medium text-gray-700">乘物游心</p>
+                                    <span class="like-count"><i class="fa fa-thumbs-up"></i> 5</span>
+                                </div>
+                                <p class="text-gray-800">我有余钱我也会这么干的</p>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded-md">
+                                <div class="flex justify-between items-start mb-1">
+                                    <p class="font-medium text-gray-700">DusTinEr</p>
+                                    <span class="like-count"><i class="fa fa-thumbs-up"></i> 14</span>
+                                </div>
+                                <p class="text-gray-800">主要是不贵，也就1万不到</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 评论2 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">汤川学_</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 275</span>
+                        </div>
+                        <p class="text-gray-800">这就和问你愿意花300吃个海底捞吗。 你愿意花50吃个肯德基吗 你愿意花钱坐高铁吗(在有k车的情况下) 你愿意出门买矿泉水吗 一样。每个人情况都不一样。我花300吃海底捞，我家里老一辈的觉得浪费钱，说为什么不在自己家里吃。 花50吃肯德基，说为什么不在家里买土豆自己炸 坐高铁说为什么不坐快车，就是时间久点。 出门买矿泉水说家里是没有水还是没有瓶子呢，还要在外面买水。 每个人消费能力不同，自己觉得合适就行，别人就让他说吧，自己活自己的，我们不会比今天的自己更年轻了，所以自己开心就行，别人的事少管</p>
+                    </div>
+                    <!-- 评论3 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">川岛小智</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 16</span>
+                        </div>
+                        <p class="text-gray-800">我的雪雪狗狗死了，找人看埋在荒山那里好，关键是大概七年后，那里修了庙子了，狗狗旁边的那颗树，已经长得非常大了，成了下去庙子的标志，已经二十年了，我从不养狗狗了，我的雪雪仍然是安全的。</p>
+                    </div>
+                    <!-- 评论4 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">小鬼卡斯帕</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 16</span>
+                        </div>
+                        <p class="text-gray-800">20年前我就想做这个行业，还有宠物墓地。但是没有钱没有地方。想想就完了，现在有这行业了。我的想法有人实现了挺好的</p>
+                        <div class="comment-reply space-y-3 mt-3">
+                            <div class="bg-gray-50 p-3 rounded-md">
+                                <div class="flex justify-between items-start mb-1">
+                                    <p class="font-medium text-gray-700">超级流浪者一路向南</p>
+                                    <span class="like-count"><i class="fa fa-thumbs-up"></i> 0</span>
+                                </div>
+                                <p class="text-gray-800">你快50了吧</p>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded-md">
+                                <div class="flex justify-between items-start mb-1">
+                                    <p class="font-medium text-gray-700">筱鲍鲍</p>
+                                    <span class="like-count"><i class="fa fa-thumbs-up"></i> 0</span>
+                                </div>
+                                <p class="text-gray-800">您出点子我出钱</p>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded-md">
+                                <div class="flex justify-between items-start mb-1">
+                                    <p class="font-medium text-gray-700">豆包是好女人吗</p>
+                                    <span class="like-count"><i class="fa fa-thumbs-up"></i> 0</span>
+                                </div>
+                                <p class="text-gray-800">墓地太夸张了</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 评论5 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">氰化物cry</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 430</span>
+                        </div>
+                        <p class="text-gray-800">挺好的，有钱就搞呗，毕竟是自己养了几年的宠物，带动一下这个行业，让年轻人有更多选择</p>
+                    </div>
+                    <!-- 评论6 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">洒家不喝酒G</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 782</span>
+                        </div>
+                        <p class="text-gray-800">有没有需要给宠物哭丧的？随叫随到，三十分钟包真哭。</p>
+                        <div class="comment-reply space-y-3 mt-3">
+                            <div class="bg-gray-50 p-3 rounded-md">
+                                <div class="flex justify-between items-start mb-1">
+                                    <p class="font-medium text-gray-700">下雪啦丶</p>
+                                    <span class="like-count"><i class="fa fa-thumbs-up"></i> 1</span>
+                                </div>
+                                <p class="text-gray-800">带我，我会吹唢呐</p>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded-md">
+                                <div class="flex justify-between items-start mb-1">
+                                    <p class="font-medium text-gray-700">凉拌折耳根不要醋</p>
+                                    <span class="like-count"><i class="fa fa-thumbs-up"></i> 0</span>
+                                </div>
+                                <p class="text-gray-800">市场这么卷了吗【狗头】【狗头】【狗头】【狗头】</p>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded-md">
+                                <div class="flex justify-between items-start mb-1">
+                                    <p class="font-medium text-gray-700">大傲中华</p>
+                                    <span class="like-count"><i class="fa fa-thumbs-up"></i> 0</span>
+                                </div>
+                                <p class="text-gray-800">跑这来抢生意了【狗头】</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 评论7 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">七海燈子和小糸侑</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 22</span>
+                        </div>
+                        <p class="text-gray-800">不影响他人不犯法我都尊重祝福。</p>
+                        <div class="comment-reply space-y-3 mt-3">
+                            <div class="bg-gray-50 p-3 rounded-md">
+                                <div class="flex justify-between items-start mb-1">
+                                    <p class="font-medium text-gray-700">张根元</p>
+                                    <span class="like-count"><i class="fa fa-thumbs-up"></i> 0</span>
+                                </div>
+                                <p class="text-gray-800">我就喜欢你这种人 中立</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 评论8 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">长钰__</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 3</span>
+                        </div>
+                        <p class="text-gray-800">我觉得挺好的，没觉得影响到谁，主人花自己的钱给自己的宠物办葬礼，这钱既没偷又没抢，人家可不就是想干什么干什么吗，为何要遭到其他人的指责呢？每个人心中珍视的事物又不同，有的人可能就是自己重要之人送的一把梳子，有的人可能是自己打工买来的ps5，那有的人珍视的就是天天陪伴自己的宠物，有何问题呢？ 骂宠物主人的我倒还挺想知道原因的，因为我确实想不到整个过程中有什么不好的地方，难道就是单纯的看不惯吗？确实很好奇【笑哭】</p>
+                    </div>
+                    <!-- 评论9 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">之昂张张张zzz</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 1</span>
+                        </div>
+                        <p class="text-gray-800">有点没法接受</p>
+                    </div>
+                    <!-- 评论10 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">抽象的小辩词</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 3</span>
+                        </div>
+                        <p class="text-gray-800">这也是时代的需求 很多夫妻都不生了 宠物当儿子养</p>
+                    </div>
+                    <!-- 评论11 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">星野青玄owo</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 5</span>
+                        </div>
+                        <p class="text-gray-800">挺好的能养活好多人</p>
+                        <div class="comment-reply space-y-3 mt-3">
+                            <div class="bg-gray-50 p-3 rounded-md">
+                                <div class="flex justify-between items-start mb-1">
+                                    <p class="font-medium text-gray-700">ccchicken</p>
+                                    <span class="like-count"><i class="fa fa-thumbs-up"></i> 0</span>
+                                </div>
+                                <p class="text-gray-800">真实的</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 评论12 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">NvRTX2080ti</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 10</span>
+                        </div>
+                        <p class="text-gray-800">新赛道算不上，四年前我老婆想开一家这样的店，但我确实不知道该如何揽客，但蓝海一定是，因为现在养宠物的多，但负责的少，一旦有负责的且相对富余的人可能确实会选择给宠物一个体面</p>
+                    </div>
+                    <!-- 评论13 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">膜拜神的诅咒</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 3</span>
+                        </div>
+                        <p class="text-gray-800">养了十年，不容易</p>
+                    </div>
+                    <!-- 评论14 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">何呵呵在哈哈</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 56</span>
+                        </div>
+                        <p class="text-gray-800">如果我有钱也想为宝贝办一场【笑哭】舍不得它走【捂脸】</p>
+                    </div>
+                    <!-- 评论15 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">雩儿雩</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 13</span>
+                        </div>
+                        <p class="text-gray-800">我觉得挺好的，没必要踩，说明主人真的挺爱这猫的，估计养了很久。</p>
+                    </div>
+                    <!-- 评论16 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">村口老表</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 1</span>
+                        </div>
+                        <p class="text-gray-800">我自己也是普通的打工人，我的两个小崽子如果以后走了我也会花钱给他们办葬礼的，因为他们是我的家人，以前我们家的老狗死了，我爷爷奶奶也花了好几百请人送到郊外风水好的地方埋葬，不是什么浪费钱，只是想最后再送他们一程</p>
+                    </div>
+                    <!-- 评论17 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">愛意隨鍾起丶</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 5</span>
+                        </div>
+                        <p class="text-gray-800">虽然我不养宠物，但是感觉挺好的，宠物不只是宠物，也是一个家庭成员。</p>
+                    </div>
+                    <!-- 评论18 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">80428772494_bili</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 92</span>
+                        </div>
+                        <p class="text-gray-800">这是社会进步的体现 是思想文明的一种新的飞跃 没什么好喷的 宠物给予人类心灵抚慰 宠物各类行业解决人类就业 延长产业链 没毛病 支持！</p>
+                        <div class="comment-reply space-y-3 mt-3">
+                            <div class="bg-gray-50 p-3 rounded-md">
+                                <div class="flex justify-between items-start mb-1">
+                                    <p class="font-medium text-gray-700">正经人不写日记啊</p>
+                                    <span class="like-count"><i class="fa fa-thumbs-up"></i> 1</span>
+                                </div>
+                                <p class="text-gray-800">只要给钱，我觉得没任何毛病，增加就业，而且能来的客户肯定都是很有钱的，正好赚他们的钱完全没问题。</p>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded-md">
+                                <div class="flex justify-between items-start mb-1">
+                                    <p class="font-medium text-gray-700">鎏錾</p>
+                                    <span class="like-count"><i class="fa fa-thumbs-up"></i> 2</span>
+                                </div>
+                                <p class="text-gray-800">宠物鱼宠物猪宠物鸡鸭现在又不是没有，只要给主人留下了美好的回忆办个葬礼又咋了</p>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded-md">
+                                <div class="flex justify-between items-start mb-1">
+                                    <p class="font-medium text-gray-700">爱缪本人</p>
+                                    <span class="like-count"><i class="fa fa-thumbs-up"></i> 0</span>
+                                </div>
+                                <p class="text-gray-800">说得很客观【鼓掌】</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 评论19 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">一只老榴芒</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 19</span>
+                        </div>
+                        <p class="text-gray-800">宠物主人真的能干出这种事，我的狗生病了买药看病多贵都不皱一下眉，自己买个外卖在那扣扣搜搜算满减哪个花的最少，这个阶段宠物已经不能算宠物了而是家人，试问谁会对自己最爱的家人吝啬</p>
+                    </div>
+                    <!-- 评论20 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">求求你正常点吧</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 5</span>
+                        </div>
+                        <p class="text-gray-800">看到弹幕有刷自我感动的 宠物对主人来说可不止是个动物，在主人眼中宠物就是另一个家人，人家愿意送自己的“家人”安详离去，怎么就是自我感动了</p>
+                        <div class="comment-reply space-y-3 mt-3">
+                            <div class="bg-gray-50 p-3 rounded-md">
+                                <div class="flex justify-between items-start mb-1">
+                                    <p class="font-medium text-gray-700">野生的高能粒子</p>
+                                    <span class="like-count"><i class="fa fa-thumbs-up"></i> 1</span>
+                                </div>
+                                <p class="text-gray-800">是的，不养宠物的人可能体会不到</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 评论21 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">鹿酱想要猫</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 24</span>
+                        </div>
+                        <p class="text-gray-800">我觉得真的很有必要！我没有钱！但我家猫子如果离开我了，我真的不知道该把猫子怎么办，丢掉我真的做不到！希望我家猫子一辈子健健康康陪着我！</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 免责声明区域 -->
+        <section class="mb-8 bg-white rounded-lg shadow-sm p-6">
+            <h2 class="text-lg font-semibold mb-4 text-gray-900"><i class="fa fa-exclamation-triangle mr-2"></i>免责声明</h2>
+            <div class="text-gray-700 text-sm leading-relaxed">
+                <!-- 可直接修改此处文字，或替换为读取本地text/disclaimer.txt（附JS读取方法，取消注释即可） -->
+                <p class="mb-2">1. 本实验仅为学术研究目的设计，所有实验数据仅用于心理学相关研究分析，不会用于任何商业用途。</p>
+                <p class="mb-2">2. 实验过程中所有问卷回答均采用匿名形式收集，研究者将严格保护参与者的个人信息，不会泄露任何可识别个人身份的内容。</p>
+                <p class="mb-2">3. 参与者在实验过程中可根据自身意愿随时退出，无需说明理由，且不会对参与者产生任何不利影响。</p>
+                <p class="mb-2">4. 本实验不涉及任何危险行为、不良信息及隐私泄露风险，若参与者在实验过程中产生任何不适，可立即停止参与并联系实验负责人。</p>
+                <p>5. 实验负责人对本实验拥有最终解释权，若有任何疑问或建议，可通过实验问卷中的联系方式与负责人沟通。</p>
+                
+                <!-- 本地文本读取方法（取消注释即可，需确保text/disclaimer.txt存在） -->
+                <!-- <div id="disclaimer-container"></div>
+                <script>
+                    fetch('text/disclaimer.txt')
+                        .then(response => response.text())
+                        .then(text => document.getElementById('disclaimer-container').innerText = text)
+                        .catch(err => console.log('本地文本读取失败：', err));
+                </script> -->
+            </div>
+        </section>
+
+        <!-- 问卷二维码区域 -->
+        <section class="bg-white rounded-lg shadow-sm p-6 text-center">
+            <h2 class="text-lg font-semibold mb-4 text-gray-900"><i class="fa fa-qrcode mr-2"></i>后测问卷</h2>
+            <p class="text-gray-800 mb-6">请使用手机扫描下方二维码，根据自身真实感受完成后测问卷，感谢你的支持！</p>
+            <!-- 本地二维码路径：image/qrcode.png，直接替换为你的二维码即可 -->
+            <div class="flex justify-center">
+                <img src="image/qrcode.png" alt="后测问卷二维码" class="w-48 h-48 object-contain border border-gray-200 p-2 rounded-md">
+            </div>
+            <p class="text-gray-500 mt-4 text-sm">若二维码无法识别，请检查网络或联系实验负责人</p>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-white shadow-sm mt-10 py-4">
+        <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
+            <p>© 2025 心理学实验研究团队 版权所有</p>
+        </div>
+    </footer>
+</body>
+</html>

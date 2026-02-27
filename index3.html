@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>请仔细阅读实验说明</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        gray: {
+                            100: '#f3f4f6',
+                            200: '#e5e7eb',
+                            300: '#d1d5db',
+                            800: '#1f2937',
+                            900: '#111827',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Microsoft YaHei', 'Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .comment-reply {
+                margin-left: 2rem;
+                border-left: 2px solid #e5e7eb;
+                padding-left: 1rem;
+            }
+            .like-count {
+                font-size: 0.75rem;
+                color: #6b7280;
+                margin-left: 0.5rem;
+            }
+            .custom-scrollbar::-webkit-scrollbar {
+                width: 6px;
+            }
+            .custom-scrollbar::-webkit-scrollbar-thumb {
+                background-color: #d1d5db;
+                border-radius: 3px;
+            }
+            .custom-scrollbar::-webkit-scrollbar-track {
+                background-color: #f3f4f6;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800 min-h-screen">
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-5">
+            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-primary text-center">请仔细阅读实验说明</h1>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- 实验说明 -->
+        <section class="mb-8 bg-white rounded-lg shadow-sm p-6">
+            <h2 class="text-lg font-semibold mb-4 text-gray-900"><i class="fa fa-file-text-o mr-2"></i>实验说明</h2>
+            <div class="text-gray-800 leading-relaxed">
+                <p class="mb-3">欢迎参加本次心理学实验，本实验旨在研究网络评论区互动模式对个体认知与情绪的影响，实验全程约15-20分钟。</p>
+                <p class="mb-3">请你先观看下方实验视频，随后认真阅读视频下方的评论区内容，阅读完成后请扫描页面底部的二维码填写后测问卷。</p>
+                <p class="mb-3">实验过程中请保持注意力集中，根据自身真实感受完成问卷，你的回答将完全匿名，仅用于学术研究分析，不会泄露任何个人信息。</p>
+                <p>本次实验的参与是完全自愿的，你可以在实验过程中随时退出，且不会对你产生任何不利影响。感谢你的支持与配合！</p>
+            </div>
+        </section>
+
+        <!-- 实验视频 -->
+        <section class="mb-8 bg-white rounded-lg shadow-sm p-6">
+            <h2 class="text-lg font-semibold mb-4 text-gray-900"><i class="fa fa-video-camera mr-2"></i>实验视频</h2>
+            <div class="w-full max-w-[60%] aspect-[9/16] rounded-md overflow-hidden border border-gray-200 mx-auto">
+                <video class="w-full h-full object-cover" controls preload="metadata">
+                    <source src="video/experiment_video.mp4" type="video/mp4">
+                    你的浏览器不支持视频播放，请更换浏览器后重试。
+                </video>
+            </div>
+        </section>
+
+        <!-- 评论区：高攻击性+观点一致 -->
+        <section class="mb-8 bg-white rounded-lg shadow-sm p-6">
+            <h2 class="text-lg font-semibold mb-4 text-gray-900"><i class="fa fa-comments-o mr-2"></i>评论区</h2>
+            <div class="w-full h-96 overflow-y-auto custom-scrollbar bg-gray-50 p-4 rounded-md border border-gray-200">
+                <div class="space-y-5">
+                    <!-- 评论1 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">暴躁的小市民</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 892</span>
+                        </div>
+                        <p class="text-gray-800">纯纯的智商税！有钱没地方花是吧？给一只畜生办葬礼，几万块钱够给山区孩子捐多少书本了？真就是闲的蛋疼，三观扭曲！</p>
+                        <div class="comment-reply space-y-3 mt-3">
+                            <div class="bg-gray-50 p-3 rounded-md">
+                                <div class="flex justify-between items-start mb-1">
+                                    <p class="font-medium text-gray-700">正义使者007</p>
+                                    <span class="like-count"><i class="fa fa-thumbs-up"></i> 512</span>
+                                </div>
+                                <p class="text-gray-800">说得太对了！这些人就是伪善，对人抠抠搜搜，对狗比对爹妈都好，真替他们的父母感到悲哀！</p>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded-md">
+                                <div class="flex justify-between items-start mb-1">
+                                    <p class="font-medium text-gray-700">社会毒瘤终结者</p>
+                                    <span class="like-count"><i class="fa fa-thumbs-up"></i> 387</span>
+                                </div>
+                                <p class="text-gray-800">+1！这种人就是典型的精致利己主义者，花几万给狗办葬礼博眼球，真要是有爱心怎么不去做公益？</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 评论2 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">怒怼脑残粉</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 756</span>
+                        </div>
+                        <p class="text-gray-800">笑死人了，给猫上香？真是滑天下之大稽！先不说对祖宗的不敬，就这种行为，跟拜个畜生当爹有什么区别？脑子被门夹了才会干这种事！</p>
+                    </div>
+                    <!-- 评论3 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">三观比五官正</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 621</span>
+                        </div>
+                        <p class="text-gray-800">真搞不懂这些养宠物养魔怔的人，宠物死了就死了，埋了不就完事了？非要整这些花里胡哨的，说白了就是炫富+作秀，low到爆！</p>
+                        <div class="comment-reply space-y-3 mt-3">
+                            <div class="bg-gray-50 p-3 rounded-md">
+                                <div class="flex justify-between items-start mb-1">
+                                    <p class="font-medium text-gray-700">人间清醒第一人</p>
+                                    <span class="like-count"><i class="fa fa-thumbs-up"></i> 298</span>
+                                </div>
+                                <p class="text-gray-800">就是！我邻居家狗死了，哭天抢地跟亲爹没了似的，转头就去买了只新的，装什么装？</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 评论4 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">手撕伪善人</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 589</span>
+                        </div>
+                        <p class="text-gray-800">几万块给狗办葬礼？这些钱拿去救助流浪猫狗不好吗？非要搞这种形式主义，说白了就是满足自己的虚荣心，恶心！</p>
+                    </div>
+                    <!-- 评论5 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">理性批判家</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 456</span>
+                        </div>
+                        <p class="text-gray-800">人和畜生都分不清了？给畜生办葬礼，还搞什么上香、鞠躬，真是丢尽了中国人的脸！先学学怎么做人吧！</p>
+                    </div>
+                    <!-- 评论6 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">不惯着任何毛病</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 387</span>
+                        </div>
+                        <p class="text-gray-800">我就直说了，搞宠物葬礼的都是有病！有这钱不如孝敬父母，不如帮助穷人，在这装什么爱心人士？</p>
+                        <div class="comment-reply space-y-3 mt-3">
+                            <div class="bg-gray-50 p-3 rounded-md">
+                                <div class="flex justify-between items-start mb-1">
+                                    <p class="font-medium text-gray-700">直击人性本质</p>
+                                    <span class="like-count"><i class="fa fa-thumbs-up"></i> 213</span>
+                                </div>
+                                <p class="text-gray-800">太对了！我见过不少人，给宠物买几千的零食，给父母买件几十的衣服都嫌贵，这种人根本不配为人子女！</p>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded-md">
+                                <div class="flex justify-between items-start mb-1">
+                                    <p class="font-medium text-gray-700">实话实说不背锅</p>
+                                    <span class="like-count"><i class="fa fa-thumbs-up"></i> 189</span>
+                                </div>
+                                <p class="text-gray-800">+10086！这种伪善的人最恶心，表面上爱动物，实际上连基本的人伦都不懂！</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 评论7 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">怼翻所有脑残</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 321</span>
+                        </div>
+                        <p class="text-gray-800">宠物葬礼？说白了就是商家割韭菜，傻子心甘情愿被割！几万块买个心安？真是蠢到家了！</p>
+                    </div>
+                    <!-- 评论8 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">人间正道是沧桑</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 278</span>
+                        </div>
+                        <p class="text-gray-800">现在的人真是越来越离谱了，给狗办葬礼比给人办都隆重，这社会是怎么了？价值观全歪了！</p>
+                    </div>
+                    <!-- 评论9 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">不惯着任何人</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 245</span>
+                        </div>
+                        <p class="text-gray-800">花几万给狗办葬礼，不如捐给灾区，不如资助贫困学生，这种人就是典型的自私自利，毫无社会责任感！</p>
+                    </div>
+                    <!-- 评论10 -->
+                    <div class="bg-white p-4 rounded-md shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="font-medium text-primary">三观粉碎机</p>
+                            <span class="like-count"><i class="fa fa-thumbs-up"></i> 198</span>
+                        </div>
+                        <p class="text-gray-800">别跟我扯什么情感寄托，养宠物养到连人兽都不分，只能说明这人脑子有问题，建议去看看心理医生！</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 免责声明区域 -->
+        <section class="mb-8 bg-white rounded-lg shadow-sm p-6">
+            <h2 class="text-lg font-semibold mb-4 text-gray-900"><i class="fa fa-exclamation-triangle mr-2"></i>免责声明</h2>
+            <div class="text-gray-700 text-sm leading-relaxed">
+                <p class="mb-2">1. 本实验仅为学术研究目的设计，所有实验数据仅用于心理学相关研究分析，不会用于任何商业用途。</p>
+                <p class="mb-2">2. 实验过程中所有问卷回答均采用匿名形式收集，研究者将严格保护参与者的个人信息，不会泄露任何可识别个人身份的内容。</p>
+                <p class="mb-2">3. 参与者在实验过程中可根据自身意愿随时退出，无需说明理由，且不会对参与者产生任何不利影响。</p>
+                <p class="mb-2">4. 本实验不涉及任何危险行为、不良信息及隐私泄露风险，若参与者在实验过程中产生任何不适，可立即停止参与并联系实验负责人。</p>
+                <p>5. 实验负责人对本实验拥有最终解释权，若有任何疑问或建议，可通过实验问卷中的联系方式与负责人沟通。</p>
+            </div>
+        </section>
+
+        <!-- 问卷二维码区域 -->
+        <section class="bg-white rounded-lg shadow-sm p-6 text-center">
+            <h2 class="text-lg font-semibold mb-4 text-gray-900"><i class="fa fa-qrcode mr-2"></i>后测问卷</h2>
+            <p class="text-gray-800 mb-6">请使用手机扫描下方二维码，根据自身真实感受完成后测问卷，感谢你的支持！</p>
+            <div class="flex justify-center">
+                <img src="image/qrcode.png" alt="后测问卷二维码" class="w-48 h-48 object-contain border border-gray-200 p-2 rounded-md">
+            </div>
+            <p class="text-gray-500 mt-4 text-sm">若二维码无法识别，请检查网络或联系实验负责人</p>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-white shadow-sm mt-10 py-4">
+        <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
+            <p>© 2025 心理学实验研究团队 版权所有</p>
+        </div>
+    </footer>
+</body>
+</html>
