@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实验参与统计</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center px-4">
+    <div class="bg-white rounded-lg shadow-md p-8 max-w-md w-full">
+        <h1 class="text-2xl font-bold mb-6">实验参与统计</h1>
+        <div id="stats" class="space-y-3"></div>
+    </div>
+
+    <script>
+        const versionCounts = JSON.parse(localStorage.getItem('versionCounts')) || {1:0,2:0,3:0,4:0};
+        const statsContainer = document.getElementById('stats');
+        
+        // 显示各版本人数
+        statsContainer.innerHTML = `
+            <p>版本1（低攻击性+观点一致）：${versionCounts[1]} 人</p>
+            <p>版本2（低攻击性+观点不一致）：${versionCounts[2]} 人</p>
+            <p>版本3（高攻击性+观点一致）：${versionCounts[3]} 人</p>
+            <p>版本4（高攻击性+观点不一致）：${versionCounts[4]} 人</p>
+            <p class="mt-4 font-bold">总计：${versionCounts[1]+versionCounts[2]+versionCounts[3]+versionCounts[4]} 人</p>
+        `;
+    </script>
+</body>
+</html>
