@@ -28,7 +28,7 @@
     </div>
 
     <script>
-        // 定义四种实验版本（对应你的四个HTML文件）
+        // 定义四种实验版本
         const experimentVersions = [
             { id: 1, name: "低攻击性+观点一致", url: "index1.html" },
             { id: 2, name: "低攻击性+观点不一致", url: "index2.html" },
@@ -36,32 +36,19 @@
             { id: 4, name: "高攻击性+观点不一致", url: "index4.html" }
         ];
 
-        // 核心：随机分配函数（保证平均分配）
+        // 完全随机分配函数（无均分逻辑，纯随机）
         function assignExperimentVersion() {
-            // 1. 检查是否已分配过版本（防止重复分配）
+            // 1. 检查是否已分配过版本（防止同一参与者重复分配）
             const assignedVersion = localStorage.getItem('experimentVersion');
             if (assignedVersion) {
                 return JSON.parse(assignedVersion);
             }
 
-            // 2. 获取当前各版本的分配计数（localStorage存储计数，保证均分）
-            let versionCounts = JSON.parse(localStorage.getItem('versionCounts')) || {
-                1: 0, 2: 0, 3: 0, 4: 0
-            };
+            // 2. 完全随机选择一个版本（每个版本概率25%）
+            const randomIndex = Math.floor(Math.random() * experimentVersions.length);
+            const selectedVersion = experimentVersions[randomIndex];
 
-            // 3. 找到当前计数最少的版本（优先分配给人数少的版本，保证平均）
-            let minCount = Math.min(...Object.values(versionCounts));
-            let candidateVersions = experimentVersions.filter(v => versionCounts[v.id] === minCount);
-
-            // 4. 从候选版本中随机选一个
-            let randomIndex = Math.floor(Math.random() * candidateVersions.length);
-            let selectedVersion = candidateVersions[randomIndex];
-
-            // 5. 更新计数并保存
-            versionCounts[selectedVersion.id]++;
-            localStorage.setItem('versionCounts', JSON.stringify(versionCounts));
-            
-            // 6. 保存当前参与者的分配结果
+            // 3. 保存分配结果（仅记录当前参与者的版本，无计数）
             localStorage.setItem('experimentVersion', JSON.stringify(selectedVersion));
 
             return selectedVersion;
